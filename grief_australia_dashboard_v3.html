@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grief Australia — 2026 Professional Development Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:        #45423D;
+  --ink-light:  #7a766f;
+  --ink-faint:  #c5c1bb;
+  --sand:       #f5f3ef;
+  --sand-dark:  #ede9e3;
+  --cream:      #faf8f5;
+  --gold:       #c8a84b;
+  --webinar-c:  #5c7080;
+  --workshop-c: #6a8a73;
+  --online-c:   #8a6a7a;
+  --roadtrip-c: #b85c38;
+  --iep-c:      #3d6b8a;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--ink);
+  padding: 28px 48px 22px;
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.header-brand .logo-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.header-brand .logo-sub {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+.header-title { flex: 1 1 auto; }
+.header-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
+}
+.header-title .subtitle {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}
+.header-stats { display: flex; gap: 28px; flex: 0 0 auto; }
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  transition: all 0.25s;
+}
+.stat-label {
+  font-size: 10px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  background: var(--sand);
+  border-bottom: 1px solid var(--sand-dark);
+  padding: 12px 48px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+}
+.controls-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.filter-group { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.ctrl-divider { width: 1px; height: 24px; background: var(--ink-faint); flex-shrink: 0; }
+
+.filter-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 1.5px solid var(--ink-faint);
+  background: transparent;
+  color: var(--ink-light);
+  padding: 4px 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.16s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+.filter-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+.filter-btn.type-webinar.active   { background: var(--webinar-c);  border-color: var(--webinar-c); }
+.filter-btn.type-workshop.active  { background: var(--workshop-c); border-color: var(--workshop-c); }
+.filter-btn.type-online.active    { background: var(--online-c);   border-color: var(--online-c); }
+.filter-btn.type-roadtrip.active  { background: var(--roadtrip-c); border-color: var(--roadtrip-c); }
+.filter-btn.type-iep.active       { background: var(--iep-c);      border-color: var(--iep-c); }
+
+.view-toggle {
+  margin-left: auto;
+  display: flex;
+  border: 1.5px solid var(--ink-faint);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.view-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+  color: var(--ink-light);
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: all 0.16s;
+  border-right: 1.5px solid var(--ink-faint);
+}
+.view-btn:last-child { border-right: none; }
+.view-btn.active, .view-btn:hover { background: var(--ink); color: #fff; }
+
+/* ── RESULTS BAR ── */
+.results-bar {
+  padding: 9px 48px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--sand-dark);
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+.results-bar strong { font-weight: 700; color: var(--ink); }
+
+/* ── LEGEND ── */
+.legend-inline {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--ink-light);
+  font-weight: 400;
+}
+.legend-pip {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── MAIN ── */
+main { flex: 1; }
+
+/* ── TIMELINE VIEW ── */
+.timeline-container { padding: 32px 48px; }
+.month-block { margin-bottom: 38px; }
+.month-block.hidden { display: none; }
+
+.month-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 9px;
+  border-bottom: 2px solid var(--ink);
+}
+.month-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.month-year {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-light);
+}
+.month-count {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-light);
+}
+.month-events {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 11px;
+}
+
+/* ── EVENT CARD ── */
+.event-card {
+  background: #fff;
+  border: 1px solid var(--sand-dark);
+  border-left: 4px solid var(--ink-faint);
+  border-radius: 4px;
+  padding: 14px 16px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+.event-card:hover {
+  box-shadow: 0 4px 18px rgba(69,66,61,0.1);
+  transform: translateY(-2px);
+}
+.event-card.type-webinar    { border-left-color: var(--webinar-c); }
+.event-card.type-workshop   { border-left-color: var(--workshop-c); }
+.event-card.type-online     { border-left-color: var(--online-c); }
+.event-card.type-roadtrip   { border-left-color: var(--roadtrip-c); }
+.event-card.type-iep        { border-left-color: var(--iep-c); }
+.event-card.filtered-out    { display: none; }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.card-type-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.type-webinar  .card-type-badge { background: #e8eef2; color: var(--webinar-c); }
+.type-workshop .card-type-badge { background: #e8f0ea; color: var(--workshop-c); }
+.type-online   .card-type-badge { background: #f0e8ee; color: var(--online-c); }
+.type-roadtrip .card-type-badge { background: #f5ebe6; color: var(--roadtrip-c); }
+.type-iep      .card-type-badge { background: #e4edf3; color: var(--iep-c); }
+
+.card-date {
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 400;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.card-footer { display: flex; align-items: center; gap: 8px; }
+.card-location {
+  font-size: 10px;
+  color: var(--ink-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.loc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  flex-shrink: 0;
+}
+.card-cpd {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  background: #fdf6e3;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+
+/* ── GRID VIEW ── */
+#view-grid { display: none; }
+.grid-container {
+  padding: 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 70px 48px; display: none; }
+.empty-state.visible { display: block; }
+.empty-state h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--ink-light);
+  margin-bottom: 8px;
+}
+.empty-state p { font-size: 13px; color: var(--ink-faint); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--sand);
+  border-top: 1px solid var(--sand-dark);
+  padding: 16px 48px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 300;
+  flex-shrink: 0;
+}
+footer a { color: var(--ink); text-decoration: none; font-weight: 700; }
+footer a:hover { text-decoration: underline; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  header, .controls, .results-bar, .timeline-container, .grid-container, footer {
+    padding-left: 20px; padding-right: 20px;
+  }
+  .header-stats { display: none; }
+  .legend-inline { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    <div class="logo-word">Grief Australia</div>
+    <div class="logo-sub">grief.org.au</div>
+  </div>
+  <div class="header-title">
+    <h1>2026 Professional Development Events</h1>
+    <div class="subtitle">Bereavement education and training for Australian practitioners</div>
+  </div>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-num" id="stat-total">43</div><div class="stat-label">Events</div></div>
+    <div class="stat"><div class="stat-num" id="stat-cpd">129</div><div class="stat-label">CPD Hours</div></div>
+    <div class="stat"><div class="stat-num" id="stat-locs">8</div><div class="stat-label">Locations</div></div>
+  </div>
+</header>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <span class="controls-label">Type</span>
+  <div class="filter-group" id="type-filters">
+    <button class="filter-btn active" data-type="all">All</button>
+    <button class="filter-btn type-webinar"  data-type="webinar">Webinar</button>
+    <button class="filter-btn type-workshop" data-type="workshop">Workshop</button>
+    <button class="filter-btn type-online"   data-type="online">Online Workshop</button>
+    <button class="filter-btn type-roadtrip" data-type="roadtrip">Road Trip</button>
+    <button class="filter-btn type-iep"      data-type="iep">International Educator</button>
+  </div>
+  <div class="ctrl-divider"></div>
+  <span class="controls-label">Location</span>
+  <div class="filter-group" id="location-filters">
+    <button class="filter-btn active" data-location="all">All</button>
+    <button class="filter-btn" data-location="Sydney">Sydney</button>
+    <button class="filter-btn" data-location="Melbourne">Melbourne</button>
+    <button class="filter-btn" data-location="Brisbane">Brisbane</button>
+    <button class="filter-btn" data-location="Adelaide">Adelaide</button>
+    <button class="filter-btn" data-location="Perth">Perth</button>
+    <button class="filter-btn" data-location="Tasmania">Tasmania</button>
+    <button class="filter-btn" data-location="Online">Online</button>
+  </div>
+  <div class="view-toggle">
+    <button class="view-btn active" id="btn-timeline">Timeline</button>
+    <button class="view-btn" id="btn-grid">All Cards</button>
+  </div>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="results-bar">
+  Showing <strong id="visible-count">43</strong> of <strong>43</strong> events
+  <div class="legend-inline">
+    <div class="legend-item"><div class="legend-pip" style="background:var(--webinar-c)"></div>Webinar</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--workshop-c)"></div>Workshop</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--online-c)"></div>Online Workshop</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--roadtrip-c)"></div>Road Trip</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--iep-c)"></div>International Educator</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+  <div id="view-timeline">
+    <div class="timeline-container" id="timeline-container"></div>
+    <div class="empty-state" id="empty-timeline">
+      <h3>No events match your filters</h3>
+      <p>Try adjusting the type or location filter above.</p>
+    </div>
+  </div>
+  <div id="view-grid">
+    <div class="grid-container" id="grid-container"></div>
+    <div class="empty-state" id="empty-grid">
+      <h3>No events match your filters</h3>
+      <p>Try adjusting the type or location filter above.</p>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  All standard events award <strong>3 CPD hours</strong> &nbsp;·&nbsp;
+  Bookings and information at <a href="https://www.grief.org.au" target="_blank">www.grief.org.au</a>
+</footer>
+
+<script>
+const EVENTS = [
+  // ── FEBRUARY ──
+  { type:"webinar",  label:"Webinar",                    title:"The Working Wounded: Supporting Bereaved Employees in the Workplace",                                                      date:"26/02/2026", month:"February",  location:"Online"    },
+
+  // ── MARCH ──
+  { type:"webinar",  label:"Webinar",                    title:"Single Session Thinking: Making the most of each encounter when working with grief",                                       date:"26/03/2026", month:"March",     location:"Online"    },
+  { type:"workshop", label:"Workshop",                   title:"Spirituality, Hope, and Meaning-Making in Grief",                                                                         date:"27/03/2026", month:"March",     location:"Online"    },
+
+  // ── APRIL ──
+  { type:"online",   label:"Online Workshop",            title:"Grief Australia Journal Club: Practitioner Series",                                                                       date:"07/04/2026", month:"April",     location:"Online"    },
+  { type:"workshop", label:"Workshop",                   title:"Providing Compassionate Care after Perinatal Loss",                                                                       date:"15/04/2026", month:"April",     location:"Online"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Sydney Road Trip: Introduction to Bereavement Support",                                                                   date:"27/04/2026", month:"April",     location:"Sydney"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Sydney Road Trip: Advanced to Bereavement Support",                                                                       date:"28/04/2026", month:"April",     location:"Sydney"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Sydney Road Trip: Supporting Grieving Children and Young People",                                                         date:"29/04/2026", month:"April",     location:"Sydney"    },
+
+  // ── MAY ──
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Adelaide Road Trip: Introduction to Bereavement Support",                                                                 date:"11/05/2026", month:"May",       location:"Adelaide"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Adelaide Road Trip: Advanced Bereavement Practice",                                                                       date:"12/05/2026", month:"May",       location:"Adelaide"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Adelaide Road Trip: Supporting Grieving Children and Young People",                                                       date:"13/05/2026", month:"May",       location:"Adelaide"  },
+  { type:"workshop", label:"Workshop",                   title:"Building Death Competency and Literacy in Helping Professionals",                                                         date:"25/05/2026", month:"May",       location:"Online"    },
+  { type:"webinar",  label:"Webinar",                    title:"Supporting Bereaved Parents: Developmental, Existential, and Treatment Considerations Following Loss of an Adult Child",  date:"28/05/2026", month:"May",       location:"Online"    },
+
+  // ── JUNE — International Educator Program ──
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"15/06/2026", month:"June",      location:"Melbourne" },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"16/06/2026", month:"June",      location:"Melbourne" },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"18/06/2026", month:"June",      location:"Adelaide"  },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"19/06/2026", month:"June",      location:"Adelaide"  },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"22/06/2026", month:"June",      location:"Perth"     },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"23/06/2026", month:"June",      location:"Perth"     },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"25/06/2026", month:"June",      location:"Brisbane"  },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"26/06/2026", month:"June",      location:"Brisbane"  },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"29/06/2026", month:"June",      location:"Sydney"    },
+  { type:"iep", label:"International Educator",          title:"Prof. Janet McCord — Suicide Prevention and Postvention",                                                                 date:"30/06/2026", month:"June",      location:"Sydney"    },
+
+  // ── JULY ──
+  { type:"workshop", label:"Workshop",                   title:"Living with Loss, Grief, Meaning, and Ageing",                                                                            date:"06/07/2026", month:"July",      location:"Online"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Brisbane Road Trip: Introduction to Bereavement Support",                                                                 date:"20/07/2026", month:"July",      location:"Brisbane"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Brisbane Road Trip: Advanced Bereavement Practice",                                                                       date:"21/07/2026", month:"July",      location:"Brisbane"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Brisbane Road Trip: Supporting Grieving Children and Young People",                                                       date:"22/07/2026", month:"July",      location:"Brisbane"  },
+  { type:"webinar",  label:"Webinar",                    title:"Ethics and Self-Disclosure: Clinical & Practical Implications",                                                           date:"30/07/2026", month:"July",      location:"Online"    },
+
+  // ── AUGUST ──
+  { type:"workshop", label:"Workshop",                   title:"From Theory to Practice: Applying Grief Models Through Case Studies",                                                     date:"07/08/2026", month:"August",    location:"Online"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Perth Road Trip: Introduction to Bereavement Support",                                                                    date:"17/08/2026", month:"August",    location:"Perth"     },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Perth Road Trip: Advanced Bereavement Practice",                                                                         date:"18/08/2026", month:"August",    location:"Perth"     },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Perth Road Trip: Supporting Grieving Children and Young People",                                                         date:"19/08/2026", month:"August",    location:"Perth"     },
+  { type:"webinar",  label:"Webinar",                    title:"Grief and AI: Deathbots, Digital Afterlife and Responsible Practice in Bereavement Care",                               date:"27/08/2026", month:"August",    location:"Online"    },
+
+  // ── SEPTEMBER ──
+  { type:"workshop", label:"Workshop",                   title:"Bearing Witness: The Clinician's Grief When a Client Dies",                                                              date:"22/09/2026", month:"September", location:"Online"    },
+  { type:"webinar",  label:"Webinar",                    title:"Dreams and Waking Experiences of the Deceased: Exploring Bereavement and End-of-Life Experiences",                      date:"24/09/2026", month:"September", location:"Online"    },
+
+  // ── OCTOBER ──
+  { type:"workshop", label:"Workshop",                   title:"Death of Animal the Underestimated Grief",                                                                               date:"12/10/2026", month:"October",   location:"Online"    },
+
+  // ── NOVEMBER ──
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Tasmania Road Trip: Introduction to Bereavement Support",                                                                date:"16/11/2026", month:"November",  location:"Tasmania"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Tasmania Road Trip: Advanced Bereavement Practice",                                                                      date:"17/11/2026", month:"November",  location:"Tasmania"  },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Tasmania Road Trip: Supporting Grieving Children and Young People",                                                      date:"18/11/2026", month:"November",  location:"Tasmania"  },
+  { type:"workshop", label:"Workshop",                   title:"Grieving in a Disconnected World",                                                                                       date:"24/11/2026", month:"November",  location:"Online"    },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Melbourne Road Trip: Introduction to Bereavement Support",                                                               date:"24/11/2026", month:"November",  location:"Melbourne" },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Melbourne Road Trip: Advanced Bereavement Practice",                                                                     date:"24/11/2026", month:"November",  location:"Melbourne" },
+  { type:"roadtrip", label:"Road Trip Workshop",         title:"Melbourne Road Trip: Supporting Grieving Children and Young People",                                                     date:"26/11/2026", month:"November",  location:"Melbourne" },
+];
+
+const MONTHS = ["February","March","April","May","June","July","August","September","October","November"];
+
+let activeType = "all";
+let activeLoc  = "all";
+let activeView = "timeline";
+
+// ── CARD ──
+function makeCard(ev) {
+  return `<div class="event-card type-${ev.type}" data-type="${ev.type}" data-loc="${ev.location}">
+    <div class="card-top">
+      <span class="card-type-badge">${ev.label}</span>
+      <span class="card-date">${ev.date}</span>
+    </div>
+    <div class="card-title">${ev.title}</div>
+    <div class="card-footer">
+      <span class="card-location"><div class="loc-dot"></div>${ev.location}</span>
+      <span class="card-cpd">3 CPD hrs</span>
+    </div>
+  </div>`;
+}
+
+// ── BUILD ──
+function buildTimeline() {
+  document.getElementById('timeline-container').innerHTML = MONTHS.map(m => {
+    const evs = EVENTS.filter(e => e.month === m);
+    if (!evs.length) return '';
+    return `<div class="month-block" data-month="${m}">
+      <div class="month-header">
+        <span class="month-name">${m}</span>
+        <span class="month-year">2026</span>
+        <span class="month-count" id="mc-${m}"></span>
+      </div>
+      <div class="month-events">${evs.map(makeCard).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildGrid() {
+  document.getElementById('grid-container').innerHTML = EVENTS.map(makeCard).join('');
+}
+
+// ── FILTER ──
+function applyFilters() {
+  document.querySelectorAll('.event-card').forEach(c => {
+    const ok = (activeType === 'all' || c.dataset.type === activeType)
+            && (activeLoc  === 'all' || c.dataset.loc  === activeLoc);
+    c.classList.toggle('filtered-out', !ok);
+  });
+
+  let tlCount = 0;
+  MONTHS.forEach(m => {
+    const block = document.querySelector(`.month-block[data-month="${m}"]`);
+    if (!block) return;
+    const n = block.querySelectorAll('.event-card:not(.filtered-out)').length;
+    block.classList.toggle('hidden', n === 0);
+    const el = document.getElementById('mc-' + m);
+    if (el) el.textContent = n === 1 ? '1 event' : `${n} events`;
+    tlCount += n;
+  });
+
+  const gCount = document.querySelectorAll('#grid-container .event-card:not(.filtered-out)').length;
+  const shown = activeView === 'timeline' ? tlCount : gCount;
+  document.getElementById('visible-count').textContent = shown;
+
+  document.getElementById('empty-timeline').classList.toggle('visible', tlCount === 0 && activeView === 'timeline');
+  document.getElementById('empty-grid').classList.toggle('visible', gCount === 0 && activeView === 'grid');
+
+  // Stats
+  const vis = EVENTS.filter(e =>
+    (activeType === 'all' || e.type === activeType) &&
+    (activeLoc  === 'all' || e.location === activeLoc)
+  );
+  document.getElementById('stat-total').textContent = vis.length;
+  document.getElementById('stat-cpd').textContent   = vis.length * 3;
+  document.getElementById('stat-locs').textContent  = new Set(vis.map(e => e.location)).size;
+}
+
+// ── EVENT LISTENERS ──
+document.getElementById('type-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#type-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeType = btn.dataset.type;
+  applyFilters();
+});
+
+document.getElementById('location-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#location-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeLoc = btn.dataset.location;
+  applyFilters();
+});
+
+document.getElementById('btn-timeline').addEventListener('click', () => {
+  activeView = 'timeline';
+  document.getElementById('btn-timeline').classList.add('active');
+  document.getElementById('btn-grid').classList.remove('active');
+  document.getElementById('view-timeline').style.display = 'block';
+  document.getElementById('view-grid').style.display = 'none';
+  applyFilters();
+});
+
+document.getElementById('btn-grid').addEventListener('click', () => {
+  activeView = 'grid';
+  document.getElementById('btn-grid').classList.add('active');
+  document.getElementById('btn-timeline').classList.remove('active');
+  document.getElementById('view-timeline').style.display = 'none';
+  document.getElementById('view-grid').style.display = 'block';
+  applyFilters();
+});
+
+// ── INIT ──
+buildTimeline();
+buildGrid();
+applyFilters();
+</script>
+</body>
+</html>
